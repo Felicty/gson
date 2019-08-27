@@ -1,11 +1,16 @@
 language: java
-
+env:
+  global:
+    - CODECOV_TOKEN=:f30344e4-5a61-4bca-88e2-cc20d35f46b0
 jdk:
   - oraclejdk9
 dist: trusty
+before_install:	before_install:
+  - pip install --user codecov	  - pip install --user codecov
 install: mvn -f gson install -DskipTests=true
 script: mvn -f gson test
-
+after_success:	after_success:
+  - codecov	  - codecov -t f30344e4-5a61-4bca-88e2-cc20d35f46b0
 branches:
   except:
     - gh-pages
